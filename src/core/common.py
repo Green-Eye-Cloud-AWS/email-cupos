@@ -62,6 +62,12 @@ class NC(object):
     nombre = obj_property('_nombre')
     cuit = obj_property('_cuit')
 
+class Planta(object):
+    nombre = obj_property('_nombre')
+    direccion = obj_property('_direccion')
+    localidad = obj_property('_localidad')
+    provincia = obj_property('_provincia')
+
 class CP(object):
     titular = NC()
     rte_com_prod = NC()
@@ -74,25 +80,17 @@ class CP(object):
     repr_entr = NC()
     destinatario = NC()
     destino = NC()
-    planta = obj_property('_planta')
-    direccion = obj_property('_direccion')
-    localidad = obj_property('_localidad')
-    provincia = obj_property('_provincia')
+    planta = Planta()
     producto = obj_property('_producto')
     observaciones = obj_property('_observaciones')
-
-class Aux(object):
     cosecha = obj_property('_cosecha')
     contrato = obj_property('_contrato')
 
 class CupoBase(object):
     org = obj_property('_org')
     user = obj_property('_user')
-    cultivo = obj_property('_cultivo')
-    puerto = obj_property('_puerto')
     id_pedido = obj_property('_id_pedido')
     cp = CP()
-    aux = Aux()
 
 cupo_base = CupoBase()
 
@@ -121,8 +119,6 @@ class Cupo(object):
             'fecha_cupo': self.fecha_cupo,
             'org': cupo_base.org,
             'user': cupo_base.user,
-            'cultivo': cupo_base.cultivo,
-            'puerto': cupo_base.puerto,
             'id_pedido': cupo_base.id_pedido,
             'cp': {
                 'titular': {
@@ -169,16 +165,16 @@ class Cupo(object):
                     'nombre': cupo_base.cp.destino.nombre,
                     'cuit': cupo_base.cp.destino.cuit
                 },
-                'planta': cupo_base.cp.planta,
-                'direccion':  cupo_base.cp.direccion,
-                'localidad':  cupo_base.cp.localidad,
-                'provincia':  cupo_base.cp.provincia,
+                'planta': {
+                    'nombre': cupo_base.cp.planta.nombre,
+                    'direccion':  cupo_base.cp.planta.direccion,
+                    'localidad':  cupo_base.cp.planta.localidad,
+                    'provincia':  cupo_base.cp.planta.provincia
+                },
                 'producto':  cupo_base.cp.producto,
-                'observaciones':  cupo_base.cp.observaciones
-            },
-            'aux': {
-                'contrato': cupo_base.aux.contrato,
-                'cosecha': cupo_base.aux.cosecha
+                'observaciones':  cupo_base.cp.observaciones,
+                'contrato': cupo_base.cp.contrato,
+                'cosecha': cupo_base.cp.cosecha
             }
         }
 

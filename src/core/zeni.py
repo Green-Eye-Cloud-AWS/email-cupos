@@ -57,10 +57,10 @@ def zeni(soup) -> list[Cupo]:
     cupo_base.cp.destino.cuit = get_num(get_string(s, 3))
 
     s = find(soup, 'Nro. Inscripción:')
-    cupo_base.cp.planta = get_num(get_string(s, 3))
+    cupo_base.cp.planta.nombre = get_num(get_string(s, 3))
 
     s = find(soup, 'Destino de los Granos:')
-    cupo_base.cp.direccion = get_string(s, 1)
+    cupo_base.cp.planta.direccion = get_string(s, 1)
 
     # '*Localidad*'
 
@@ -72,15 +72,11 @@ def zeni(soup) -> list[Cupo]:
     s = find(soup, 'Observaciones:')
     cupo_base.cp.observaciones = get_string(s, 1)
 
-    #
-    # Datos auxiliares del cupo
-    #
-
     s = find(soup, 'Cosecha:')
-    cupo_base.aux.cosecha = get_string(s, 1)
+    cupo_base.cp.cosecha = get_string(s, 1)
 
     s = find(soup, 'Contrato:')
-    cupo_base.aux.contrato = get_string(s, 1)
+    cupo_base.cp.contrato = get_string(s, 1)
 
     #
     # Cupos

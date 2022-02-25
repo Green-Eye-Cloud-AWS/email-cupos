@@ -79,7 +79,7 @@ def fyo(soup) -> list[Cupo]:
             break
 
     s = find(sp, 'Cosecha')
-    cupo_base.aux.cosecha = get_string(s, 1)
+    cupo_base.cp.cosecha = get_string(s, 1)
 
     s = find(sp, 'Observaciones')
     cupo_base.cp.observaciones = get_string(s, 1)
@@ -91,16 +91,16 @@ def fyo(soup) -> list[Cupo]:
             break
 
     s = find(sp, 'Dirección')
-    cupo_base.cp.direccion = get_string(s, 1)
+    cupo_base.cp.planta.direccion = get_string(s, 1)
 
     s = find(sp, 'N° Planta (RUCA)')
-    cupo_base.cp.planta = get_num(get_string(s, 1))
+    cupo_base.cp.planta.nombre = get_num(get_string(s, 1))
 
     s = find(sp, 'Localidad')
-    cupo_base.cp.localidad = get_string(s, 1)
+    cupo_base.cp.planta.localidad = get_string(s, 1)
 
     s = find(sp, 'Provincia')
-    cupo_base.cp.provincia = get_char(get_string(s, 1))
+    cupo_base.cp.planta.provincia = get_char(get_string(s, 1))
 
     #
     # Tabla cabecera
@@ -110,7 +110,7 @@ def fyo(soup) -> list[Cupo]:
     cupo_base.cp.producto = get_char(get_string(s, 1))
 
     s = find(soup, 'Contrato')
-    cupo_base.aux.contrato = get_string(s, 1)
+    cupo_base.cp.contrato = get_string(s, 1)
 
     #
     # Cupos
